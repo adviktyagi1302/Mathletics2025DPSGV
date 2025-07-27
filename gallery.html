@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gallery – Quiz 2025</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    body.light {
+      background: linear-gradient(to bottom right, #f5f5f5, #e8f0e1);
+      color: #333;
+    }
+
+    body.dark {
+      background: linear-gradient(to bottom right, #1b1b1b, #2e2e2e);
+      color: #eee;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #005a2b;
+      color: #fff;
+      padding: 15px;
+    }
+
+    header img {
+      height: 60px;
+      margin-right: 20px;
+    }
+
+    header h1 {
+      font-size: 26px;
+      margin: 0;
+      flex: 1;
+    }
+
+    #themeToggle {
+      background: #f68b1e;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    #themeToggle:hover {
+      background: #e07b13;
+    }
+
+    nav {
+      background: #f68b1e;
+      display: flex;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    nav a {
+      flex: 1;
+      text-align: center;
+      padding: 14px 20px;
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      position: relative;
+      transition: background 0.3s;
+    }
+
+    nav a:hover, nav a.active {
+      background: #e07b13;
+      border-radius: 10px;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 5px;
+      left: 50%;
+      background-color: white;
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+
+    nav a:hover::after, nav a.active::after {
+      width: 80%;
+      left: 10%;
+    }
+
+    .event-info {
+      background: white;
+      padding: 20px;
+      margin: 0 auto;
+      max-width: 400px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      color: #005a2b;
+    }
+
+    body.dark .event-info {
+      background: #2d2d2d;
+      color: #a5e7bd;
+    }
+
+    main {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      margin: 40px auto;
+      max-width: 800px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      color: #333;
+    }
+
+    body.dark main {
+      background: #2e2e2e;
+      color: #eee;
+    }
+
+    h2 {
+      font-size: 22px;
+      color: #005a2b;
+      margin-bottom: 20px;
+    }
+
+    .tagline {
+      font-size: 20px;
+      margin: 20px 0;
+    }
+
+    .event-info p {
+      font-size: 18px;
+      margin: 5px;
+    }
+
+    .red {
+      color: red;
+      font-weight: bold;
+    }
+
+    .teachers, .about-school {
+      text-align: left;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .teachers ul {
+      padding-left: 20px;
+      font-size: 18px;
+    }
+
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+
+    body.dark footer {
+      background: #111;
+      color: #ccc;
+    }
+
+    footer:hover {
+      color: #f68b1e;
+      text-shadow: 0 0 5px #f68b1e;
+      cursor: default;
+    }
+
+.gallery-table {
+  width: 100%;
+  border-spacing: 20px;
+  text-align: center;
+}
+
+.gallery-table img {
+  width: 100%;
+  max-width: 150px;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.gallery-table img:hover {
+  transform: scale(1.05);
+}
+
+  </style>
+
+  <script>
+    window.onload = () => {
+      // Highlight nav link
+      const navLinks = document.querySelectorAll('nav a');
+      const current = window.location.pathname.split("/").pop();
+      navLinks.forEach(link => {
+        if (link.getAttribute("href") === current) {
+          link.classList.add("active");
+        }
+      });
+
+      // Handle Theme
+      const body = document.body;
+      const toggleBtn = document.getElementById("themeToggle");
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        body.classList.add("dark");
+        body.classList.remove("light");
+        toggleBtn.textContent = "☀️ Light Mode";
+      } else {
+        body.classList.add("light");
+        toggleBtn.textContent = "🌙 Dark Mode";
+      }
+
+      toggleBtn.onclick = () => {
+        body.classList.toggle("dark");
+        body.classList.toggle("light");
+        const isDark = body.classList.contains("dark");
+        toggleBtn.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+      };
+    };
+  </script>
+
+</head>
+<body>
+  <header>
+    <img src="images/logo/logo.png" alt="DPSGV Logo" />
+    <h1>Matheletics Interschool Quiz Competition 2025</h1>
+    <button id="themeToggle">🌙 Dark Mode</button>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="results.html">Results</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="about.html">About Us</a>
+  </nav>
+  <!-- <main>
+    <h2>Gallery Coming Soon!</h2>
+  </main> -->
+<main>
+  <h2>Gallery - coming soon..!!</h2>
+  <div class="gallery-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; max-width: 800px; margin: 0 auto;">
+    <!--
+    <img src="images/gallery/img1.jpeg" alt="Gallery Image 1" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" />
+    <img src="images/gallery/img2.jpeg" alt="Gallery Image 2" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" />
+    <img src="images/gallery/img3.jpeg" alt="Gallery Image 3" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" />
+    <img src="images/gallery/img4.jpeg" alt="Gallery Image 4" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" />
+    <img src="images/gallery/img5.jpeg" alt="Gallery Image 5" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" />
+    <img src="images/gallery/img6.jpeg" alt="Gallery Image 6" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" />
+    <img src="images/gallery/img7.jpeg" alt="Gallery Image 7" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" />
+    <img src="images/gallery/img8.jpeg" alt="Gallery Image 8" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" />
+    <img src="images/gallery/img9.jpeg" alt="Gallery Image 9" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" />
+    <img src="images/gallery/img10.jpeg" alt="Gallery Image 10" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" />
+    -->
+    <!-- Add more images here as needed -->
+  </div>
+</main>
+  <footer>
+    © 2025 Mathletics Quiz | DPSG Vasundhara
+  </footer>
+</body>
+</html>
